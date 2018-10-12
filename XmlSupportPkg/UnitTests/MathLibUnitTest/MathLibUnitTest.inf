@@ -40,6 +40,7 @@
 
 [Sources]
   MathLibUnitTests.c
+  TestData.h
 
 [Packages]
   MsUnitTestPkg/MsUnitTestPkg.dec
@@ -50,7 +51,6 @@
   BaseLib
   MemoryAllocationLib 
   MathLib
-  XmlTreeQueryLib
   UnitTestLib
   UnitTestAssertLib
   
