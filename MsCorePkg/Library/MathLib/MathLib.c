@@ -110,8 +110,8 @@ cos_d(
     double previousValue = 1; //x0
     int16_t multiply = -1; //we subtract first possibly faster
     uint32_t iterationCount = 4; //we start at four
-    double top = radians * radians; //x^3
-    long denom = 2; //3!
+    double top = radians * radians; //x^2
+    long denom = 2; //2!
     double value = previousValue - (top/denom);
 
     //iterate 7 iterations
@@ -189,7 +189,7 @@ EFIAPI
 sin_u32(
   IN CONST UINT32 angleInDegrees
 ){
-
+    return 0;
 }
 
 
@@ -205,7 +205,7 @@ EFIAPI
 cos_u32(
   IN CONST UINT32 angleInDegrees
 ){
-
+    return 0;
 }
 
 /**
