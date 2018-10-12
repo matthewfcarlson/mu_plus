@@ -169,7 +169,7 @@ sqrt_d(
     //do 7 iterations
     //any further iterations yields no accuracy benefits
     //quadratic convergent so we get 4x the precision each iteration 
-    for (int i=0;i<7 && x != 0 && prevX != x;i++){
+    for (int i=0;i<6 && x != 0 && prevX != x;i++){
         prevX = x;
         x = .5 * (prevX + (input/prevX));
     }

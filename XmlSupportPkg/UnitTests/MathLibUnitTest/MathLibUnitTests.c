@@ -39,19 +39,29 @@ TestSine(
   IN UNIT_TEST_CONTEXT           Context
 )
 {
-  XmlNode *ResultData = NULL;
-  UINTN TotalElements = 0;
-  EFI_STATUS Status;
-  
-  //Status = CreateXmlTree(MyString, AsciiStrLen(MyString), &ResultData);
-  //UT_ASSERT_NOT_NULL(ResultData); 
+  UINTN Index = 0;
+  double current;
+  MathLibContext *MathContext = (MathLibContext*)Context;  
+  double result;
+  double totalErrorSquared = 0;
+  double maxError = 0;
+  double totalAllowedError = MathContext.maxTotalError;
+  double maxAllowedError = MathContext.maxError;
 
-  //Status = XmlTreeNumberOfNodes(ResultData, &TotalElements);
+  double error = 0;
 
-  //free our memory 
-  //FreeXmlTree(&ResultData);
-  //UT_ASSERT_NOT_EFI_ERROR(Status);
-  //UT_ASSERT_EQUAL(4, TotalElements);
+
+  for (current= MathContext.start;current < MathLibContext.stop; current+= MathContext.step){
+    result = sin_d(current);
+    error = result - MathContext.data[Index];
+    error *= error;
+    totalErrorSquared += error;
+    if (error > maxError) maxError = error;
+    UT_ASSERT_TRUE(maxError < maxAllowedError);
+    Index++;
+  }
+
+  UT_ASSERT_TRUE(totalErrorSquared < totalAllowedError);
 
   return UNIT_TEST_PASSED;
 }
