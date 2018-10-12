@@ -1,0 +1,30 @@
+## @file
+#  MathLib - Basic library that includes SIN, COS, and SQRT
+#  
+
+#  Copyright (c) 2018, Microsoft Corporation. 
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00000001
+  BASE_NAME                      = MathLib
+  FILE_GUID                      = 485F46E6-7E5D-4E05-BDBE-CBBAE5E7EFB7
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MathLib | DXE_DRIVER DXE_RUNTIME_DRIVER UEFI_DRIVER
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64 AARCH64
+#
+
+[Sources]
+ MathLib.c
+
+[Packages]
+  
+[LibraryClasses]
+
+[Protocols]
+
+[Guids]
