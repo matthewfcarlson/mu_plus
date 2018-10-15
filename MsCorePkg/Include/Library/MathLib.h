@@ -29,6 +29,8 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef __MU_MATH_LIB__
 #define __MU_MATH_LIB__
 
+#define MU_PI 3.1415926535897932384626433832
+
 /**
 Find sine of a provided double in radians
 
@@ -119,7 +121,7 @@ Find square root of the provided unsigned 64bit integer
 UINT64
 EFIAPI
 sqrt_u64(
-  IN CONST UINT32 input
+  IN CONST UINT64 input
 );
 
 #endif

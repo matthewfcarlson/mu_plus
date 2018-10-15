@@ -23,6 +23,7 @@
 
 [Packages]
   MsCorePkg/MsCorePkg.dec
+  MdePkg/MdePkg.dec
   
 [LibraryClasses]
 
