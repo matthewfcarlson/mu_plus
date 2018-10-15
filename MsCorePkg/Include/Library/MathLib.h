@@ -1,5 +1,5 @@
 /** @file
-This library supports generic XML queries based on the Xml Tree lib.
+This library supports basic math operations such as SQRT, sin, cos
 
 
 Copyright (c) 2018, Microsoft Corporation

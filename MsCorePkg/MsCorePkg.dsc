@@ -111,6 +111,7 @@
 
 [Components]
   MsCorePkg/Library/CapsuleResetLibNull/CapsuleResetLibNull.inf
+  MsCorePkg/Library/MathLib/MathLib.inf
  
 [Components.IA32]
   MsCorePkg/Core/GuidedSectionExtractPeim/GuidedSectionExtract.inf

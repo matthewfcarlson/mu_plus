@@ -7,12 +7,12 @@
 ##
 
 [Defines]
-  INF_VERSION                    = 0x00000001
+  INF_VERSION                    = 0x00010005
   BASE_NAME                      = MathLib
   FILE_GUID                      = 485F46E6-7E5D-4E05-BDBE-CBBAE5E7EFB7
   MODULE_TYPE                    = DXE_DRIVER
   VERSION_STRING                 = 1.0
-  LIBRARY_CLASS                  = MathLib | DXE_DRIVER DXE_RUNTIME_DRIVER UEFI_DRIVER
+  LIBRARY_CLASS                  = MathLib | DXE_DRIVER DXE_RUNTIME_DRIVER
 
 #
 #  VALID_ARCHITECTURES           = IA32 X64 AARCH64
@@ -22,6 +22,7 @@
  MathLib.c
 
 [Packages]
+  MsCorePkg/MsCorePkg.dec
   
 [LibraryClasses]
 
