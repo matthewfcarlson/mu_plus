@@ -29,6 +29,11 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <Uefi.h>
 #include <Library/MathLib.h>
 
+
+//You need to include this to let the compiler know we are going to use floating point
+int   _fltused = 0x9875;       // As taken from "stub.c" in the CRT sources.
+
+
 /**
 Find sine of a provided double in radians
 
@@ -62,7 +67,7 @@ sin_d(
     INT16 multiply = -1; //we subtract first possibly faster
     UINT32 iterationCount = 5; //
     double top = radians * radians * radians; //x^3
-    long denom = 3*2; //3!
+    UINT64 denom = 3*2; //3!
     double value = previousValue - (top/denom);
 
     //iterate 7 iterations
@@ -113,7 +118,7 @@ cos_d(
     INT16 multiply = -1; //we subtract first possibly faster
     UINT32 iterationCount = 4; //we start at four
     double top = radians * radians; //x^2
-    long denom = 2; //2!
+    UINT64 denom = 2; //2!
     double value = previousValue - (top/denom);
 
     //iterate 7 iterations
@@ -126,7 +131,7 @@ cos_d(
         value = previousValue + (multiply*top/denom);
     }
     //checking for convergence provides neglieble speedup and a drop in accuracy.
-
+    return value;
 }
 
 //Bit scan reverse for 64 bit values

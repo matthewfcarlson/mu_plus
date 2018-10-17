@@ -5,6 +5,8 @@ tags/
 *.pyc
 *.bak
 BuildConfig.conf
+temp/
+Conf/
 
 # Ignore SelfDescribingEnvironment artifacts.
 *_extdep/

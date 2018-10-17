@@ -43,17 +43,21 @@
   TestData.h
 
 [Packages]
+  MsCorePkg/MsCorePkg.dec
   MsUnitTestPkg/MsUnitTestPkg.dec
+  MdePkg/MdePkg.dec
 
    
 [LibraryClasses]
-  UefiApplicationEntryPoint
   BaseLib
-  MemoryAllocationLib 
-  MathLib
+  BaseMemoryLib
+  UefiApplicationEntryPoint
+  DebugLib
   UnitTestLib
   UnitTestAssertLib
-  
+  UnitTestLogLib
+  PrintLib
+  MathLib
 
 [Protocols]
   

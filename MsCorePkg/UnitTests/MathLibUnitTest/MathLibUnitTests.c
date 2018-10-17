@@ -26,11 +26,18 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 **/
 #include "MathLibUnitTests.h"
+#include "TestData.h"
+#include <Library/MathLib.h>
+#include <Library/UnitTestLib.h>
+#include <Library/UnitTestLogLib.h>
+#include <Library/DebugLib.h>
+#include <Library/PrintLib.h>
+#include <Library/UnitTestAssertLib.h>
 
 
 
 /**
-Test Node count function on known count
+Test sine function
 **/
 UNIT_TEST_STATUS
 EFIAPI
@@ -39,32 +46,118 @@ TestSine(
   IN UNIT_TEST_CONTEXT           Context
 )
 {
+  UT_LOG_INFO( "Testing Sine function\n" );
   UINTN Index = 0;
   double current;
-  MathLibContext *MathContext = (MathLibContext*)Context;  
+  MathLibContext *mathContext = (MathLibContext*)Context;  
   double result;
   double totalErrorSquared = 0;
   double maxError = 0;
-  double totalAllowedError = MathContext.maxTotalError;
-  double maxAllowedError = MathContext.maxError;
-
+  double totalAllowedError = mathContext->maxTotalError;
+  double maxAllowedError = mathContext->maxSingleError;
   double error = 0;
 
 
-  for (current= MathContext.start;current < MathLibContext.stop; current+= MathContext.step){
+  for (current= mathContext->start;current < mathContext->stop; current+= mathContext->step){
     result = sin_d(current);
-    error = result - MathContext.data[Index];
+    error = result - mathContext->data[Index];
     error *= error;
     totalErrorSquared += error;
     if (error > maxError) maxError = error;
+    if (maxError >= maxAllowedError){
+      UT_LOG_WARNING("COS at %llx = %llx",current,result);
+    }
+    
     UT_ASSERT_TRUE(maxError < maxAllowedError);
     Index++;
   }
-
+  UT_LOG_WARNING("TOTAL ERROR: %llx",totalErrorSquared);
   UT_ASSERT_TRUE(totalErrorSquared < totalAllowedError);
 
   return UNIT_TEST_PASSED;
 }
+/**
+Test sine function
+**/
+UNIT_TEST_STATUS
+EFIAPI
+TestSqrt(
+  IN UNIT_TEST_FRAMEWORK_HANDLE  Framework,
+  IN UNIT_TEST_CONTEXT           Context
+)
+{
+  UT_LOG_INFO( "Testing Square Root function\n" );
+  UINTN Index = 0;
+  double current;
+  MathLibContext *mathContext = (MathLibContext*)Context;  
+  double result;
+  double totalErrorSquared = 0;
+  double maxError = 0;
+  double totalAllowedError = mathContext->maxTotalError;
+  double maxAllowedError = mathContext->maxSingleError;
+  double error = 0;
+
+  for (current= mathContext->start;current < mathContext->stop; current+= mathContext->step){
+    result = sqrt_d(current);
+    error = result - mathContext->data[Index];
+    error *= error;
+    totalErrorSquared += error;
+    if (error > maxError) maxError = error;
+    if (maxError >= maxAllowedError){
+      UT_LOG_WARNING("SQRT at %llx = %llx",current,result);
+    }
+    UT_ASSERT_TRUE(maxError < maxAllowedError);
+    Index++;
+  }
+  UT_LOG_WARNING("TOTAL ERROR: %llx",totalErrorSquared);
+  UT_ASSERT_TRUE(totalErrorSquared < totalAllowedError);
+
+  return UNIT_TEST_PASSED;
+}
+
+/**
+Test sine function
+**/
+UNIT_TEST_STATUS
+EFIAPI
+TestCos(
+  IN UNIT_TEST_FRAMEWORK_HANDLE  Framework,
+  IN UNIT_TEST_CONTEXT           Context
+)
+{
+  //MathLibContext *MathContext = (MathLibContext*)Context;  
+  UT_LOG_INFO( "Testing Cosine function\n" );
+  UINTN Index = 0;
+  double current;
+  MathLibContext *mathContext = (MathLibContext*)Context;  
+  double result;
+  double totalErrorSquared = 0;
+  double maxError = 0;
+  double totalAllowedError = mathContext->maxTotalError;
+  double maxAllowedError = mathContext->maxSingleError;
+  double error = 0;
+
+
+  for (current= mathContext->start;current < mathContext->stop; current+= mathContext->step){
+    result = cos_d(current);
+    error = result - mathContext->data[Index];
+    error *= error;
+    totalErrorSquared += error;
+    if (error > maxError) maxError = error;
+    if (maxError >= maxAllowedError){
+      DEBUG(( DEBUG_INFO, "COS %llx = %llx",current,result));
+      UT_LOG_WARNING("COS at %llx = %llx",current,result);
+    }
+    
+    UT_ASSERT_TRUE(maxError < maxAllowedError);
+    Index++;
+  }
+  UT_LOG_WARNING("TOTAL ERROR: %llx",totalErrorSquared);
+  UT_ASSERT_TRUE(totalErrorSquared < totalAllowedError);
+
+  return UNIT_TEST_PASSED;
+}
+
 
 //----------------------------------------------------
 // UEFI main
@@ -114,11 +207,6 @@ UefiMain(
   
  
 EXIT:
-  //Clean up Node Tree for query
-  if (mNode != NULL)
-  {
-    FreeXmlTree(&mNode);
-  }
 
   if (Fw != NULL)
   {
