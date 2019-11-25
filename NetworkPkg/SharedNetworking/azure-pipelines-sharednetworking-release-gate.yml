@@ -89,15 +89,3 @@ steps:
   condition: succeeded()
   inputs:
     artifactName: 'Nuget Package'
-
-# publish to Nuget
-- task: NuGetCommand@2
-  condition: eq(variables.ShouldPublish, 'true')
-  inputs:
-    command: push
-    nuGetFeedType: external
-    publishFeedCredentials: 'Uefibot_Mu_SharedCrypto'
-    versioningScheme: byEnvVar
-    versionEnvVar: NugetPackageVersion
-    verbosityPush: 'detailed'
-    configuration: 'NetworkPkg/SharedNetworking/SharedNetworking.config.json'
